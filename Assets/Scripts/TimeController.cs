@@ -20,6 +20,8 @@ public class TimeController : MonoBehaviour
 
     private bool buttonRendered;
 
+    private GameObject clock;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +62,9 @@ public class TimeController : MonoBehaviour
 
     private void NoParamaterOnclick()
     {
+        clock = GameObject.FindGameObjectWithTag("Clock");
+        clock.SetActive(true);
+
         HideButton();
         timeLeft = 30f;
     }
