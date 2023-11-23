@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,8 +10,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f; // maximum horizontal speed
     public float moveAcceleration = 10f; // how quickly the player accelerates/decelerates
     public float jumpSpeed = 10f; // initial jump speed
-    public float gravityScale = 2f; // how strong the gravity is
-    public float friction = 0.2f; // friction coefficient
+    public float gravityScale = 2.5f; // how strong the gravity is
+    public float friction = 0.0f; // friction coefficient
     public bool isGrounded = false; // is the player on the ground?
 
     public Collider2D groundCheckCollider; // reference to the ground check collider
@@ -40,19 +41,12 @@ public class PlayerController : MonoBehaviour
         horizontalVelocity = Mathf.MoveTowards(horizontalVelocity, targetVelocity, moveAcceleration * Time.fixedDeltaTime);
         rb.velocity = new Vector2(horizontalVelocity, rb.velocity.y);
 
-        // apply friction
-        if (isGrounded)
+        if(isGrounded && horizontalVelocity < 0 && (horizontalInput > 0 || horizontalInput < 0))
         {
-            float frictionForce = -rb.velocity.x * friction;
-            rb.AddForce(new Vector2(frictionForce, 0));
-        }
-        else
-        {
-            float frictionForce = -rb.velocity.magnitude * friction;
-            rb.AddForce(rb.velocity.normalized * frictionForce);
+            Debug.Log("amogus");
         }
 
-        if(horizontalInput < 0)
+        if(horizontalInput > 0)
         {
             gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
         }

@@ -17,7 +17,7 @@ public class Clock : MonoBehaviour
         if (timeController != null)
         {
             Debug.Log(timeController.timeLeft + 30);
-            timeController.timeLeft += 30;
+            timeController.timeLeft += 20;
             clock.SetActive(false);
         }
     }
